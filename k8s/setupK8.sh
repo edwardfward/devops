@@ -59,6 +59,7 @@ EOF
         kubectl=$KUBECTL_DEB_VER
 
     sudo apt-mark hold docker-ce kubelet kubeadm kubectl
+    sudo apt autoremove -y
 
 else
     # add rpm based instructions
