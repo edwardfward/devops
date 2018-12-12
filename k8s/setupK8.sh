@@ -32,7 +32,7 @@ if [[ ! ${RPM} ]]; then
 elif [[ ! ${DEBIAN} ]]; then
     OS="deb"
 else
-    echo
+    echo "Kubernetes setup error: could not find package manager"
     exit 1
 fi
 
