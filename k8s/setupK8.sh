@@ -39,8 +39,8 @@ fi
 # do package manager specific installs
 if [[ $OS = "deb" ]]; then
 
-    DOCKER_GPG=$(curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
-    | sudo apt-key add -)
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+        sudo apt-key add -
 
     sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/ \
     linux/ubuntu $(lsb_release -cs) stable"
@@ -53,10 +53,10 @@ EOF
 
     sudo apt-get update -y
     sudo apt-get install -y \
-        docker-ce=$(DOCKER_CE_DEB_VER) \
-        kubelet=$(KUBELET_DEB_VER) \
-        kubeadm=$(KUBEADM_DEB_VER) \
-        kubectl=$(KUBECTL_DEB_VER)
+        docker-ce=$DOCKER_CE_DEB_VER \
+        kubelet=$KUBELET_DEB_VER \
+        kubeadm=$KUBEADM_DEB_VER \
+        kubectl=$KUBECTL_DEB_VER
 else
     # add rpm based instructions
     echo "need to add RPM-based instructions"
