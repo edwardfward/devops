@@ -6,7 +6,7 @@
 
 NODE_TYPE=$1
 
-if [[ $(NODE_TYPE) != "master" && $(NODE_TYPE) != "node" ]]; then
+if [[ $NODE_TYPE != "master" && $NODE_TYPE != "node" ]]; then
     echo "Kubernetes setup error: argument must be 'master' or 'node', not $1"
     exit 1
 fi
@@ -66,7 +66,7 @@ fi
 echo "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 
-if [[ $(NODE_TYPE) = "master" ]]; then
+if [[ $NODE_TYPE = "master" ]]; then
 
     sudo kubeadm init --pod-network-cidr=10.244.0.0/16
     mkdir -p $HOME/.kube
