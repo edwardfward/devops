@@ -79,7 +79,7 @@ if [[ $NODE_TYPE = "master" ]]; then
 
 else
 
-    echo "Kubernetes node setup complete. Copy and run kubeint command \
-    provided by the master to finish setup."
+    echo "Kubernetes node setup complete. Copy and run kubeint command" + \
+    "provided by the master to finish setup."
 
 fi
