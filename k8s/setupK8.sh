@@ -27,9 +27,9 @@ DEBIAN=$?
 
 # make a best guess as to the best package manager to use
 
-if [[ ! ${RPM} ]]; then
+if [[ ! $RPM ]]; then
     OS="rpm"
-elif [[ ! ${DEBIAN} ]]; then
+elif [[ ! $DEBIAN ]]; then
     OS="deb"
 else
     echo "Kubernetes setup error: could not find package manager"
@@ -37,7 +37,7 @@ else
 fi
 
 # do package manager specific installs
-if [[ ${OS} = "deb" ]]; then
+if [[ $OS = "deb" ]]; then
 
     DOCKER_GPG=$(curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
     | sudo apt-key add -)
