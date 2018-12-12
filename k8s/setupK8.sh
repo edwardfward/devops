@@ -6,7 +6,7 @@
 
 NODE_TYPE=$1
 
-if [[ \($(NODE_TYPE) != "master"\) -a \($(NODE_TYPE) != "node"\) ]]; then
+if [[ $(NODE_TYPE) != "master" -a $(NODE_TYPE) != "node" ]]; then
     echo "Kubernetes setup error: argument must be 'master' or 'node', not $1"
     exit 1
 fi
