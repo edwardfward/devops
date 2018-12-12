@@ -75,7 +75,7 @@ sudo sysctl -p
 if [[ $NODE_TYPE = "master" ]]; then
 
     sudo kubeadm init --pod-network-cidr=10.244.0.0/16 | sudo tee $HOME/kubeinit.out
-    grep '^  kubeadm join' $HOME/kubeinit.out > kubenodetoken
+    grep '^  kubeadm join' $HOME/kubeinit.out > $HOME/kubenodetoken
     mkdir -p $HOME/.kube
     sudo cp -rf /etc/kubernetes/admin.conf $HOME/.kube/config
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
