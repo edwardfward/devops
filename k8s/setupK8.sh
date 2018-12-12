@@ -42,10 +42,9 @@ if [[ $OS = "deb" ]]; then
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
         sudo apt-key add -
 
-    sudo add-apt-repository \
-    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) stable"
-
+    cat <<EOF > /etc/apt/sources.list.d/docker.list
+    "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+EOF
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
     cat << EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
@@ -58,6 +57,9 @@ EOF
         kubelet=$KUBELET_DEB_VER \
         kubeadm=$KUBEADM_DEB_VER \
         kubectl=$KUBECTL_DEB_VER
+
+    sudo apt-mark hold docker-ce kubelet kubeadm kubectl
+
 else
     # add rpm based instructions
     echo "need to add RPM-based instructions"
