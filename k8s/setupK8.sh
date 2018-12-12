@@ -19,11 +19,11 @@ KUBECTL_DEB_VER="1.12.2-00"
 
 # Check if the distro uses a RPM-based package manager
 /usr/bin/rpm -q -f /usr/bin/rpm >/dev/null 2>&1
-RPM=$(echo $?)
+RPM=$?
 
 # Check if the distro uses a Debian-based package manager
 /usr/bin/dpkg --search /usr/bin/dpkg >/dev/null 2>&1
-DEBIAN=$(echo $?)
+DEBIAN=$?
 
 # make a best guess as to the best package manager to use
 
@@ -32,6 +32,7 @@ if [[ ! ${RPM} ]]; then
 elif [[ ! ${DEBIAN} ]]; then
     OS="deb"
 else
+    echo
     exit 1
 fi
 
