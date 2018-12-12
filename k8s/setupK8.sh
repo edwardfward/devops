@@ -66,12 +66,12 @@ else
     echo "need to add RPM-based instructions"
 fi
 
-# configure net bridge
+# configure net bridge, verify line is not present before adding
 grep '^net[.]bridge[.].*' /etc/sysctl.conf || echo \
 "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
-
 sudo sysctl -p
 
+# init kube master
 if [[ $NODE_TYPE = "master" ]]; then
 
     sudo kubeadm init --pod-network-cidr=10.244.0.0/16 | sudo tee $HOME/kubeinit.out
