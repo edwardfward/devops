@@ -27,9 +27,9 @@ DEBIAN=$?
 
 # make a best guess as to the best package manager to use
 
-if [[ ! $RPM ]]; then
+if [[ $RPM -eq 0 ]]; then
     OS="rpm"
-elif [[ ! $DEBIAN ]]; then
+elif [[ $DEBIAN -eq 0 ]]; then
     OS="deb"
 else
     echo "Kubernetes setup error: could not find package manager"
