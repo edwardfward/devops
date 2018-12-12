@@ -67,20 +67,22 @@ else
 fi
 
 # configure net bridge
-echo "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
+grep -q '^net.bridge.bridge.*' /etc/sysctl.conf || sudo echo \
+    "net.bridge.bridge-nf-call-iptables=1" >> /etc/sysctl.conf
+
 sudo sysctl -p
 
 if [[ $NODE_TYPE = "master" ]]; then
 
-    sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+    sudo kubeadm init --pod-network-cidr=10.244.0.0/16 >> $HOME/kubeinit.out
+    tail -n 1 $HOME/kubeinit.out
     mkdir -p $HOME/.kube
     sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
-    kubectl apply -f https://raw.githubuserconten.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml
+    kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml
 
+    # TODO: check .kube/config file present
 else
-
     echo "Kubernetes node setup complete. Copy and run kubeint command" \
     "provided by the master to finish setup."
-
 fi
