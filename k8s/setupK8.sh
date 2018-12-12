@@ -43,7 +43,7 @@ if [[ $OS = "deb" ]]; then
         sudo apt-key add -
 
     cat <<EOF | sudo tee /etc/apt/sources.list.d/docker.list
-    "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
 EOF
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
@@ -79,7 +79,7 @@ if [[ $NODE_TYPE = "master" ]]; then
 
 else
 
-    echo "Kubernetes node setup complete. Copy and run kubeint command" + \
+    echo "Kubernetes node setup complete. Copy and run kubeint command" \
     "provided by the master to finish setup."
 
 fi
